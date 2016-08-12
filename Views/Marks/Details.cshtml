@@ -1,0 +1,67 @@
+﻿@model SchoolDatabase.Models.MarkSheet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MarkSheet</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Physics)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Physics)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chemistry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chemistry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Math)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Math)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Marks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Marks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Studentdb.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Studentdb.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Roll_No }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

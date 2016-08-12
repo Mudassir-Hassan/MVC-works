@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassDetails">
+          <Key>
+            <PropertyRef Name="Name of Class" />
+          </Key>
+          <Property Name="Name of Class" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Section" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Total Students" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarkSheet">
+          <Key>
+            <PropertyRef Name="Roll_No" />
+          </Key>
+          <Property Name="Roll_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Physics" Type="int" Nullable="false" />
+          <Property Name="Chemistry" Type="int" Nullable="false" />
+          <Property Name="Math" Type="int" Nullable="false" />
+          <Property Name="Total_Marks" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Studentdb">
+          <Key>
+            <PropertyRef Name="Roll_No" />
+          </Key>
+          <Property Name="Roll_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Father_Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MarkSheet_Studentdb">
+          <End Role="Studentdb" Type="Self.Studentdb" Multiplicity="1" />
+          <End Role="MarkSheet" Type="Self.MarkSheet" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Studentdb">
+              <PropertyRef Name="Roll_No" />
+            </Principal>
+            <Dependent Role="MarkSheet">
+              <PropertyRef Name="Roll_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolModelStoreContainer">
+          <EntitySet Name="ClassDetails" EntityType="Self.ClassDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkSheet" EntityType="Self.MarkSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studentdb" EntityType="Self.Studentdb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MarkSheet_Studentdb" Association="Self.FK_MarkSheet_Studentdb">
+            <End Role="Studentdb" EntitySet="Studentdb" />
+            <End Role="MarkSheet" EntitySet="MarkSheet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClassDetail">
+          <Key>
+            <PropertyRef Name="Name_of_Class" />
+          </Key>
+          <Property Name="Name_of_Class" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Section" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Total_Students" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="MarkSheet">
+          <Key>
+            <PropertyRef Name="Roll_No" />
+          </Key>
+          <Property Name="Roll_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Physics" Type="Int32" Nullable="false" />
+          <Property Name="Chemistry" Type="Int32" Nullable="false" />
+          <Property Name="Math" Type="Int32" Nullable="false" />
+          <Property Name="Total_Marks" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Studentdb" Relationship="Self.FK_MarkSheet_Studentdb" FromRole="MarkSheet" ToRole="Studentdb" />
+        </EntityType>
+        <EntityType Name="Studentdb">
+          <Key>
+            <PropertyRef Name="Roll_No" />
+          </Key>
+          <Property Name="Roll_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Father_Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MarkSheet" Relationship="Self.FK_MarkSheet_Studentdb" FromRole="Studentdb" ToRole="MarkSheet" />
+        </EntityType>
+        <Association Name="FK_MarkSheet_Studentdb">
+          <End Role="Studentdb" Type="Self.Studentdb" Multiplicity="1" />
+          <End Role="MarkSheet" Type="Self.MarkSheet" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Studentdb">
+              <PropertyRef Name="Roll_No" />
+            </Principal>
+            <Dependent Role="MarkSheet">
+              <PropertyRef Name="Roll_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClassDetails" EntityType="Self.ClassDetail" />
+          <EntitySet Name="MarkSheets" EntityType="Self.MarkSheet" />
+          <EntitySet Name="Studentdbs" EntityType="Self.Studentdb" />
+          <AssociationSet Name="FK_MarkSheet_Studentdb" Association="Self.FK_MarkSheet_Studentdb">
+            <End Role="Studentdb" EntitySet="Studentdbs" />
+            <End Role="MarkSheet" EntitySet="MarkSheets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities1">
+          <EntitySetMapping Name="ClassDetails">
+            <EntityTypeMapping TypeName="SchoolModel.ClassDetail">
+              <MappingFragment StoreEntitySet="ClassDetails">
+                <ScalarProperty Name="Name_of_Class" ColumnName="Name of Class" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Total_Students" ColumnName="Total Students" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkSheets">
+            <EntityTypeMapping TypeName="SchoolModel.MarkSheet">
+              <MappingFragment StoreEntitySet="MarkSheet">
+                <ScalarProperty Name="Roll_No" ColumnName="Roll_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Physics" ColumnName="Physics" />
+                <ScalarProperty Name="Chemistry" ColumnName="Chemistry" />
+                <ScalarProperty Name="Math" ColumnName="Math" />
+                <ScalarProperty Name="Total_Marks" ColumnName="Total_Marks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studentdbs">
+            <EntityTypeMapping TypeName="SchoolModel.Studentdb">
+              <MappingFragment StoreEntitySet="Studentdb">
+                <ScalarProperty Name="Roll_No" ColumnName="Roll_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

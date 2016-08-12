@@ -1,0 +1,35 @@
+﻿@model SchoolDatabase.Models.ClassDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ClassDetail</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_Students)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_Students)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Name_of_Class }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
